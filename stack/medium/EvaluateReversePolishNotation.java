@@ -6,16 +6,14 @@ import java.util.Stack;
 
 public class EvaluateReversePolishNotation {
 
-    public static Integer evaluate(ArrayList<String> input){
-    
-        
-        ArrayList<String> operators = new ArrayList<>(List.of("+","-","*","/"));
+    public static Integer evaluate(ArrayList<String> input) {
+
+        ArrayList<String> operators = new ArrayList<>(List.of("+", "-", "*", "/"));
 
         Stack<Integer> stack = new Stack<>();
-        
-        
+
         for (int i = 0; i < input.size(); i++) {
-            if(operators.contains(input.get(i))){
+            if (operators.contains(input.get(i))) {
                 int element2 = stack.pop();
                 int element1 = stack.pop();
 
@@ -23,13 +21,13 @@ public class EvaluateReversePolishNotation {
                     case "+":
                         stack.push(element1 + element2);
                         break;
-                        case "*":
+                    case "*":
                         stack.push(element1 * element2);
                         break;
-                        case "/":
+                    case "/":
                         stack.push(element1 / element2);
                         break;
-                        case "-":
+                    case "-":
                         stack.push(element1 - element2);
                         break;
                     default:
@@ -44,11 +42,9 @@ public class EvaluateReversePolishNotation {
     }
 
     public static void main(String[] args) {
-        
 
         ArrayList<String> testCase = new ArrayList<>(
-            List.of("10","6","9","3","+","-11","*","/","*","17","+","5","+")
-        );
+                List.of("10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"));
 
         System.out.println("result = " + evaluate(testCase));
     }
