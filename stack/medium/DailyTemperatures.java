@@ -1,62 +1,69 @@
 package stack.medium;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Stack;
 
 public class DailyTemperatures {
-    public static int[] dailyTemperatures(int[] temperatures) {
-        int[] result = new int[temperatures.length];
 
+
+    public static int[] dailyTemperatures(int[] temperatures) {
+
+        int[] result = new int[temperatures.length];
         Stack<ArrayList<Integer>> stack = new Stack<>();
 
-        for (int i = 0; i < temperatures.length; i++) {
-            while (!stack.isEmpty() && stack.peek().get(0) < temperatures[i]) {
-                ArrayList<Integer> top = stack.pop();
-                result[top.get(1)] = i-top.get(1);
-            }
-            stack.push(
-                    new ArrayList<>(List.of(
-                            temperatures[i], i)));
 
+
+        for (int i = 0; i < result.length; i++) {
+            
+            while (!stack.isEmpty() && stack.peek().getFirst() < temperatures[i]){
+                ArrayList<Integer> cell = stack.pop();
+                result[cell.getLast()] = i - cell.getLast();
+                
+            } 
+            stack.push(
+                new ArrayList<>(List.of(
+                    temperatures[i],i
+                ))
+            );
         }
 
         return result;
     }
 
-    public static int[] dailyTemperaturesFasterSolution(int[] temperatures) {
+    public static int[] dailyTemperatures_n_sqr_solution(int[] temperatures){
         int[] result = new int[temperatures.length];
-        int max = Integer.MIN_VALUE;
-
-        for (int i =  temperatures.length-1; i >=0; i--) {
-
-            if (max < temperatures[i]){
-                max = temperatures[i];
-                continue;
+    
+        for (int i = 0; i < result.length; i++) {
+            int count = 1;
+            for (int j = i + 1; j < temperatures.length; j++) {
+                if (temperatures[j] <= temperatures[i]){
+                    count++;
+                }
+                else {
+                    result[i] = count;
+                    break;
+                }
             }
-
-            int days = 1;
-            while(temperatures[i+days] < temperatures[i]){
-                days += result[i+days];
-            }
-
-            result[i] = days;
-
         }
 
-
         return result;
-
     }
 
     
 
+    @SuppressWarnings("unused")
     public static void main(String[] args) {
 
-        int[] testCase = { 30,40,50,60 };
+        int[] testCase1 = {30,38,30,36,35,40,28};
+        int[] testCase2 = {22,21,20};
 
         System.out.println(
-                Arrays.toString(dailyTemperaturesFasterSolution(testCase)));
+            Arrays.toString(testCase1) + "\n" + 
+            Arrays.toString(dailyTemperatures(testCase1))
+        );
+
     }
+
 }
