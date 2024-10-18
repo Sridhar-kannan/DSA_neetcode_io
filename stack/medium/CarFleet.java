@@ -18,7 +18,7 @@ public class CarFleet {
 
         cars.sort((o1, o2) -> o2.getFirst() - o1.getFirst());
 
-        Stack<ArrayList<Integer>> stack = new Stack();
+        Stack<ArrayList<Integer>> stack = new Stack<>();
 
         for (ArrayList<Integer> car : cars) {
             if (stack.isEmpty()) {
