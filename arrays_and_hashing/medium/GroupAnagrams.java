@@ -36,6 +36,8 @@ public class GroupAnagrams {
     }
     
 
+    @SuppressWarnings("unused")
+
     public static void main(String[] args) {
         
 
